@@ -1,7 +1,8 @@
 {
     "env" : {
         "MYSQL_USER" : "root",
-        "MYSQL_PASSWORD" : "master123"
+        "MYSQL_PASSWORD" : "master123",
+        "JWT_KEY" : "super_secret_password"
 
     }
 

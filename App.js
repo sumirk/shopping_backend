@@ -1,6 +1,7 @@
+require("dotenv").config();
 const express = require('express')
 const bodyParser = require('body-parser')
-
+const helmet = require("helmet");
 
 const productRoutes = require('./routes/product-routes');
 const adminRoutes = require('./routes/admin-routes')
@@ -17,6 +18,7 @@ const OrderItem = require('./models/order-item')
 
 
 const app = express();
+app.use(helmet());
 
 app.use(bodyParser.json())
 

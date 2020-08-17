@@ -23,7 +23,7 @@ exports.signupUser = async function(req,res,next) {
         const hash = await bcrypt.hash(password, 12)
         password = hash
         user = await User.create({ name, email, password})
-        token = jwt.sign({ userId: user.id, email: user.email }, "super_secret_password", { expiresIn: 300 })
+        token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_KEY , { expiresIn: 300 })
         
     } catch (error) {
         return next(error)
@@ -72,9 +72,9 @@ exports.loginUser = async function (req, res, next) {
 
     try {
         token = jwt.sign(
-        { userId: identifyUser.id, email: identifyUser.email },
-        "super_secret_password",
-        { expiresIn: 300 }
+          { userId: identifyUser.id, email: identifyUser.email },
+          process.env.JWT_KEY,
+          { expiresIn: 300 }
         );
     } catch (error) {
         return next(new httpError("Logging in Failed"), 500);

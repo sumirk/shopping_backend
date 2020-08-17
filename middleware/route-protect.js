@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
     if (!token) {
       throw new httpError("Authentication Failed");
     }
-    const decodedToken = jwt.verify(token, "super_secret_password");
+    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
     const userId = decodedToken.userId;
     console.log(userId)
     const user = await User.findByPk(userId);
